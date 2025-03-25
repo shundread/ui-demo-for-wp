@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { GatewayStatus } from "../../api/GatewayApiTypes";
 
 export interface GatewayListItemProps {
@@ -28,6 +29,13 @@ export function GatewayListItem({
       <td>{model}</td>
       <td>{version}</td>
       <td>{latestMessageTime.toString() /* TODO proper formatting */}</td>
+      <td>
+        <Link to={{ pathname: `gateway/${uuid}`, }}>
+          <span>See details</span>
+          <img alt="" src="/icons/link.svg" width="24" height="24"></img>
+        </Link>
+      </td>
+
     </tr>
   )
 }
