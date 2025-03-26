@@ -1,4 +1,5 @@
 import { GatewayStatus, SingleGatewayStatsResponseTimeInStatusesS } from "../../api/GatewayApiTypes";
+import { dateStr, timeStr } from "../../utils/timeFormatting";
 
 export interface GatewayDetailSummaryProps {
     startTime: Date;
@@ -17,11 +18,13 @@ export function GatewayDetailSummary({
         <section>
             <h2>Summary</h2>
             <dl>
-                <dt>Data interval</dt>
-                <dd>{startTime.toISOString()} - {endTime.toISOString()} (this many seconds)</dd>
+                <dt>Earliest sample</dt>
+                <dd>{dateStr(startTime)} - {timeStr(startTime)}</dd>
+                <dt>Latest sample</dt>
+                <dd>{dateStr(endTime)} - {timeStr(endTime)}</dd>
                 <dt>Latest status</dt>
                 <dd>{latestStatus}</dd>
-                <dt>Time spent in different statuses</dt>
+                <dt>Time spent in different statuses (in seconds)</dt>
                 <dd>
                     <table>
                         <thead>

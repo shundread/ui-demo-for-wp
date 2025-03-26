@@ -15,7 +15,7 @@ export function GatewayDetailTimeline({ historySamples, statusChangeEvents }: Ga
                 <table className="gateway-stats-timeline-table">
                     <thead className="gateway-stats-timeline-table-header">
                         <tr>
-                            <th scope="col">Timestamp</th>
+                            <th scope="col">Time</th>
                             <th scope="col">Active</th>
                             <th scope="col">Inactive</th>
                             <th scope="col">Unstable</th>

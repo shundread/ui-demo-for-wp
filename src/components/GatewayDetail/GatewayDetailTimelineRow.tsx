@@ -1,4 +1,5 @@
 import { SingleGatewayStatsResponseTimeInStatusesS } from "../../api/GatewayApiTypes";
+import { shortDateStr, timeStr } from "../../utils/timeFormatting";
 import { GatewayStatsStatusChangeEvent } from "./GatewayDetailTypes";
 
 export interface GatewayDetailTimelineRowProps {
@@ -17,18 +18,18 @@ export function GatewayDetailTimelineRow({
     timeInStatusesS,
     statusChangeEvents,
 }: GatewayDetailTimelineRowProps) {
-    const durationMs = endTime.valueOf() - startTime.valueOf();
-    if (durationMs <= 0) throw new Error(`Invalid gateway stats history sample duration: ${durationMs}`);
+    const durationS = (endTime.valueOf() - startTime.valueOf()) / 1000;
+    if (durationS <= 0) throw new Error(`Invalid gateway stats history sample duration: ${durationS}`);
 
-    const opacityActive = timeInStatusesS.active / durationMs;
-    const opacityInactive = timeInStatusesS.inactive / durationMs;
-    const opacityUnstable = timeInStatusesS.unstable / durationMs;
-    const opacityOffline = timeInStatusesS.offline / durationMs;
+    const opacityActive = timeInStatusesS.active / durationS;
+    const opacityInactive = timeInStatusesS.inactive / durationS;
+    const opacityUnstable = timeInStatusesS.unstable / durationS;
+    const opacityOffline = timeInStatusesS.offline / durationS;
 
     return (
         <tr>
             <td className="gateway-stats-timeline-table-body-timestamp">
-                {index % 5 === 0 ? <span>{startTime.toISOString()}</span> : null}
+                {index % 5 === 0 ? <span>{shortDateStr(startTime)} - {timeStr(startTime)}</span> : null}
             </td>
             <td className="gateway-stats-timeline-table-body-active" style={{ opacity: opacityActive }}></td>
             <td className="gateway-stats-timeline-table-body-inactive" style={{ opacity: opacityInactive }}></td>
@@ -49,5 +50,8 @@ interface GatewayDetailTimelineRowEventsProps {
 
 function GatewayDetailTimelineRowEvents({ startTime, endTime, statusChangeEvents }: GatewayDetailTimelineRowEventsProps) {
     const relevantStatusChangeEvents = statusChangeEvents.filter((statusChangeEvent) => statusChangeEvent.eventTime >= startTime && statusChangeEvent.eventTime < endTime)
-    return relevantStatusChangeEvents.map((statusChangeEvent) => `${statusChangeEvent.eventTime.toISOString()} -> ${statusChangeEvent.status}`).reverse().join(", ")
+    return relevantStatusChangeEvents
+        .map((statusChangeEvent) => `${timeStr(statusChangeEvent.eventTime)} -> ${statusChangeEvent.status}`)
+        .reverse()
+        .join(", ")
 }
