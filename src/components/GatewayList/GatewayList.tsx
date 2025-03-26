@@ -111,7 +111,7 @@ export function GatewayList({ gateways }: GatewayListProps) {
                         </th>
                     </tr>
                     <tr>
-                        <th scope="col">UUID</th>
+                        <th scope="col">Gateway edit</th>
                         <th scope="col">
                             <button onClick={
                                 () => sortingPolicy === SortingPolicy.IdAsc
