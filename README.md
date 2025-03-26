@@ -2,7 +2,7 @@
 
 ## Requirements
 
-* Node version 20 or higher, might work with 18
+- Node version 20 or higher, might work with 18
 
 ## How to run
 

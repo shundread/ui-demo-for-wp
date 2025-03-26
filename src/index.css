@@ -80,14 +80,14 @@ button:focus-visible {
 }
 
 .gateway-list thead {
-  background-color: cornsilk
+  background-color: cornsilk;
 }
 
 .gateway-list th {
   text-align: center;
 }
 
-.gateway-list thead>:last-child>th {
+.gateway-list thead > :last-child > th {
   border-bottom: 1px solid lightgrey;
 }
 
@@ -102,9 +102,9 @@ button:focus-visible {
   border-right: 1px solid lightgrey;
 }
 
-.gateway-list tbody>:nth-child(6n+3),
-.gateway-list tbody>:nth-child(6n+4),
-.gateway-list tbody>:nth-child(6n+5) {
+.gateway-list tbody > :nth-child(6n + 3),
+.gateway-list tbody > :nth-child(6n + 4),
+.gateway-list tbody > :nth-child(6n + 5) {
   background-color: whitesmoke;
 }
 
@@ -119,7 +119,7 @@ button:focus-visible {
   background-color: lightgray;
 }
 
-.gateway-list tbody tr:hover>td {
+.gateway-list tbody tr:hover > td {
   background-color: lightgray;
   border-left: 1px solid grey;
   border-right: 1px solid grey;
@@ -141,29 +141,29 @@ button:focus-visible {
   overflow: hidden;
 }
 
-.gateway-stats-timeline-table>tbody>tr:hover {
+.gateway-stats-timeline-table > tbody > tr:hover {
   outline: 1px solid grey;
 }
 
-.gateway-stats-timeline-table>thead>tr>th {
+.gateway-stats-timeline-table > thead > tr > th {
   min-width: 6rem;
   padding: 1rem;
   background-color: darkslategrey;
   border-bottom: 1px solid black;
 }
 
-.gateway-stats-timeline-table>tbody>tr {
+.gateway-stats-timeline-table > tbody > tr {
   height: 18px;
   font-size: 12px;
 }
 
-.gateway-stats-timeline-table-body>tr,
-.gateway-stats-timeline-table-body>tr>td {
+.gateway-stats-timeline-table-body > tr,
+.gateway-stats-timeline-table-body > tr > td {
   border: none;
   text-align: center;
 }
 
-.gateway-stats-timeline-table-body>tr>td>span {
+.gateway-stats-timeline-table-body > tr > td > span {
   color: black;
   padding: 2px 2px;
 }

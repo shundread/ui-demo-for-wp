@@ -35,79 +35,102 @@ export function GatewayListItem({
   return (
     <tr>
       <td>
-        {isEditing ?
+        {isEditing ? (
           <>
-            <button onClick={() => {
-              updateGateway({
-                uuid,
-                gatewayId: pendingGatewayId,
-                description: pendingDescription,
-                model: pendingModel,
-                version: pendingVersion,
-                status,
-                latestMessageTime,
-              })
-              setIsEditing(false);
-            }}>Save</button>
-            <button onClick={() => {
-              setPendingGatewayId(gatewayId);
-              setPendingDescription(description);
-              setPendingModel(model);
-              setPendingVersion(version);
-              setIsEditing(false);
-            }}
-            >Discard changes</button>
+            <button
+              onClick={() => {
+                updateGateway({
+                  uuid,
+                  gatewayId: pendingGatewayId,
+                  description: pendingDescription,
+                  model: pendingModel,
+                  version: pendingVersion,
+                  status,
+                  latestMessageTime,
+                });
+                setIsEditing(false);
+              }}
+            >
+              Save
+            </button>
+            <button
+              onClick={() => {
+                setPendingGatewayId(gatewayId);
+                setPendingDescription(description);
+                setPendingModel(model);
+                setPendingVersion(version);
+                setIsEditing(false);
+              }}
+            >
+              Discard changes
+            </button>
           </>
-          : <button onClick={() => setIsEditing(true)}>Edit</button>}
+        ) : (
+          <button onClick={() => setIsEditing(true)}>Edit</button>
+        )}
       </td>
-      <td>{isEditing ? (
-        <input
-          type="text"
-          id={`${uuid}:gatewayId`}
-          name={`${uuid}:gatewayId`}
-          value={pendingGatewayId}
-          onChange={(event) => setPendingGatewayId(event.target.value)}
-        />
-      )
-        : gatewayId}</td>
-      <td>{isEditing ? (
-        <input
-          type="text"
-          id={`${uuid}:description`}
-          name={`${uuid}:description`}
-          value={pendingDescription}
-          onChange={(event) => setPendingDescription(event.target.value)}
-        />
-      )
-        : description}</td>
-      <td>{status}</td>
-      <td>{isEditing ? (
-        <input
-          type="text"
-          id={`${uuid}:model`}
-          name={`${uuid}:model`}
-          value={pendingModel}
-          onChange={(event) => setPendingModel(event.target.value)}
-        />
-      )
-        : model}</td>
-      <td>{isEditing ? (
-        <input
-          type="text"
-          id={`${uuid}:version`}
-          name={`${uuid}:version`}
-          value={pendingVersion}
-          onChange={(event) => setPendingVersion(event.target.value)}
-        />
-      )
-        : version}</td>
-      <td>{dateStr(latestMessageTime)} - {timeStr(latestMessageTime)}</td>
       <td>
-        <Link to={{ pathname: `gateway/${uuid}`, }}>
+        {isEditing ? (
+          <input
+            type="text"
+            id={`${uuid}:gatewayId`}
+            name={`${uuid}:gatewayId`}
+            value={pendingGatewayId}
+            onChange={(event) => setPendingGatewayId(event.target.value)}
+          />
+        ) : (
+          gatewayId
+        )}
+      </td>
+      <td>
+        {isEditing ? (
+          <input
+            type="text"
+            id={`${uuid}:description`}
+            name={`${uuid}:description`}
+            value={pendingDescription}
+            onChange={(event) => setPendingDescription(event.target.value)}
+          />
+        ) : (
+          description
+        )}
+      </td>
+      <td>{status}</td>
+      <td>
+        {isEditing ? (
+          <input
+            type="text"
+            id={`${uuid}:model`}
+            name={`${uuid}:model`}
+            value={pendingModel}
+            onChange={(event) => setPendingModel(event.target.value)}
+          />
+        ) : (
+          model
+        )}
+      </td>
+      <td>
+        {isEditing ? (
+          <input
+            type="text"
+            id={`${uuid}:version`}
+            name={`${uuid}:version`}
+            value={pendingVersion}
+            onChange={(event) => setPendingVersion(event.target.value)}
+          />
+        ) : (
+          version
+        )}
+      </td>
+      <td>
+        {dateStr(latestMessageTime)} - {timeStr(latestMessageTime)}
+      </td>
+      <td>
+        <Link to={{ pathname: `gateway/${uuid}` }}>
           <span>See details</span>
           <img alt="" src="/icons/link.svg" width="24" height="24"></img>
         </Link>
       </td>
     </tr>
-  )
+  );
 }
