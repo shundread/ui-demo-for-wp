@@ -2,8 +2,7 @@ import { Link } from "react-router";
 import { GatewayStatus } from "../../api/GatewayApiTypes";
 import { dateStr, timeStr } from "../../utils/timeFormatting";
 import { useState } from "react";
-import useLocalStorage from "use-local-storage";
-import { storageFieldId } from "../../utils/localStorage";
+import { useGateways } from "../../hooks/useGateways";
 
 export interface GatewayListItemProps {
   uuid: string;
@@ -24,19 +23,14 @@ export function GatewayListItem({
   version,
   latestMessageTime,
 }: GatewayListItemProps) {
-  const [isEditing, setIsEditing] = useState(false);
-
-  // Stored values
-  const [storedGatewayId, saveGatewayId] = useLocalStorage(storageFieldId({ uuid, field: "gatewayId" }), gatewayId);
-  const [storedDescription, saveDescription] = useLocalStorage(storageFieldId({ uuid, field: "description" }), description);
-  const [storedModel, saveModel] = useLocalStorage(storageFieldId({ uuid, field: "model" }), model);
-  const [storedVersion, saveVersion] = useLocalStorage(storageFieldId({ uuid, field: "version" }), version)
+  const { updateGateway } = useGateways();
 
   // Pending edit values
-  const [pendingGatewayId, setPendingGatewayId] = useState(storedGatewayId);
-  const [pendingDescription, setPendingDescription] = useState(storedDescription);
-  const [pendingModel, setPendingModel] = useState(storedModel);
-  const [pendingVersion, setPendingVersion] = useState(storedVersion);
+  const [isEditing, setIsEditing] = useState(false);
+  const [pendingGatewayId, setPendingGatewayId] = useState(gatewayId);
+  const [pendingDescription, setPendingDescription] = useState(description);
+  const [pendingModel, setPendingModel] = useState(model);
+  const [pendingVersion, setPendingVersion] = useState(version);
 
   return (
     <tr>
@@ -44,17 +38,22 @@ export function GatewayListItem({
         {isEditing ?
           <>
             <button onClick={() => {
-              saveGatewayId(pendingGatewayId);
-              saveDescription(pendingDescription);
-              saveModel(pendingModel);
-              saveVersion(pendingVersion);
+              updateGateway({
+                uuid,
+                gatewayId: pendingGatewayId,
+                description: pendingDescription,
+                model: pendingModel,
+                version: pendingVersion,
+                status,
+                latestMessageTime,
+              })
               setIsEditing(false);
             }}>Save</button>
             <button onClick={() => {
-              setPendingGatewayId(storedGatewayId);
-              setPendingDescription(storedDescription);
-              setPendingModel(storedModel);
-              setPendingVersion(storedVersion);
+              setPendingGatewayId(gatewayId);
+              setPendingDescription(description);
+              setPendingModel(model);
+              setPendingVersion(version);
               setIsEditing(false);
             }}
             >Discard changes</button>
@@ -70,7 +69,7 @@ export function GatewayListItem({
           onChange={(event) => setPendingGatewayId(event.target.value)}
         />
       )
-        : storedGatewayId}</td>
+        : gatewayId}</td>
       <td>{isEditing ? (
         <input
           type="text"
@@ -80,7 +79,7 @@ export function GatewayListItem({
           onChange={(event) => setPendingDescription(event.target.value)}
         />
       )
-        : storedDescription}</td>
+        : description}</td>
       <td>{status}</td>
       <td>{isEditing ? (
         <input
@@ -91,7 +90,7 @@ export function GatewayListItem({
           onChange={(event) => setPendingModel(event.target.value)}
         />
       )
-        : storedModel}</td>
+        : model}</td>
       <td>{isEditing ? (
         <input
           type="text"
@@ -101,7 +100,7 @@ export function GatewayListItem({
           onChange={(event) => setPendingVersion(event.target.value)}
         />
       )
-        : storedVersion}</td>
+        : version}</td>
       <td>{dateStr(latestMessageTime)} - {timeStr(latestMessageTime)}</td>
       <td>
         <Link to={{ pathname: `gateway/${uuid}`, }}>

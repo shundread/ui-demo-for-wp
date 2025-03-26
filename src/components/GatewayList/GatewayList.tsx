@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GatewayListItem, GatewayListItemProps } from "./GatewayListItem";
 import { GatewayStatus } from "../../api/GatewayApiTypes";
+import { useGateways } from "../../hooks/useGateways";
 
 enum SortingPolicy {
     IdAsc,
@@ -11,11 +12,8 @@ enum SortingPolicy {
     LatestDesc,
 }
 
-export interface GatewayListProps {
-    gateways: GatewayListItemProps[];
-}
-
-export function GatewayList({ gateways }: GatewayListProps) {
+export function GatewayList() {
+    const { gateways } = useGateways();
     const [sortingPolicy, setSortingPolicy] = useState(SortingPolicy.LatestDesc);
 
     const [gatewayIdFilter, setGatewayIdFilter] = useState("");
