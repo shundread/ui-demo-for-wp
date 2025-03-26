@@ -1,37 +1,23 @@
 import { GatewayStatus, SingleGatewayStatsResponseTimeInStatusesS } from "../../api/GatewayApiTypes";
 import { dateStr, timeStr } from "../../utils/timeFormatting";
 
-export interface GatewayDetailSummaryProps {
-    gatewayId?: string;
-    description?: string;
-    model?: string;
-    version?: string;
+export interface GatewayStatsDataSummaryProps {
     startTime: Date;
     endTime: Date;
     latestStatus: GatewayStatus;
     timeInStatusesS: SingleGatewayStatsResponseTimeInStatusesS;
 }
 
-export function GatewayDetailSummary({
-    gatewayId,
-    description,
-    model,
-    version,
+export function GatewayStatsDataSummary({
     startTime,
     endTime,
     latestStatus,
     timeInStatusesS
-}: GatewayDetailSummaryProps) {
+}: GatewayStatsDataSummaryProps) {
     return (
         <section>
-            <h2>Summary</h2>
+            <h2>Data summary</h2>
             <dl>
-                <dt>Gateway ID</dt>
-                <dd>{gatewayId || "gateway details not found"}</dd>
-                <dt>Description</dt>
-                <dd>{description || "gateway details not found"}</dd>
-                <dt>Model and version</dt>
-                <dd>{model && version ? `${model}, version ${version}` : "gateway details not found"}</dd>
                 <dt>Earliest sample</dt>
                 <dd>{dateStr(startTime)} - {timeStr(startTime)}</dd>
                 <dt>Latest sample</dt>

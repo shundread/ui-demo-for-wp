@@ -19,7 +19,7 @@ export function parseGatewayListingResponse(data: GatewayListingResponse): Gatew
     }))
 }
 
-export function parseGatewayStatsResponse(data: SingleGatewayStatsResponse): GatewayDetailProps {
+export function parseGatewayStatsResponse(data: SingleGatewayStatsResponse): Pick<GatewayDetailProps, "summary" | "timeline"> {
     return {
         summary: {
             startTime: parseApiTimestamp(data.summary.startTime),

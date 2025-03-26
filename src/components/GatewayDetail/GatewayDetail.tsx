@@ -1,28 +1,23 @@
-import { useParams } from "react-router";
-import { useGateways } from "../../hooks/useGateways";
-import { GatewayDetailSummary, GatewayDetailSummaryProps } from "./GatewayDetailSummary";
+import { GatewayStatsDataSummary, GatewayStatsDataSummaryProps } from "./GatewayStatsDataSummary";
 import { GatewayDetailTimeline, GatewayDetailTimelineProps } from "./GatewayDetailTimeline";
+import { GatewayListItemProps } from "../GatewayList";
+import { GatewayDetailBasicInfo } from "./GatewayDetailBasicInfo";
 
 export interface GatewayDetailProps {
-    summary: GatewayDetailSummaryProps;
+    basicInfo?: GatewayListItemProps;
+    summary: GatewayStatsDataSummaryProps;
     timeline: GatewayDetailTimelineProps;
 }
 
 export function GatewayDetail({
+    basicInfo,
     summary,
     timeline,
 }: GatewayDetailProps) {
-    const { gateways } = useGateways();
-    const params = useParams()
-    const gateway = gateways.find((gateway) => gateway.uuid === params.uuid)
-
     return (
         <>
-            <GatewayDetailSummary
-                gatewayId={gateway?.gatewayId || "gateway details not found"}
-                description={gateway?.description || "gateway details not found"}
-                model={gateway?.model || "gateway details not found"}
-                version={gateway?.version}
+            <GatewayDetailBasicInfo {...basicInfo} />
+            <GatewayStatsDataSummary
                 startTime={summary.startTime}
                 endTime={summary.endTime}
                 latestStatus={summary.latestStatus}
