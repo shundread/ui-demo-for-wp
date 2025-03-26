@@ -8,9 +8,13 @@ export interface GatewayDetailTimelineProps {
 
 
 export function GatewayDetailTimeline({ historySamples, statusChangeEvents }: GatewayDetailTimelineProps) {
+    // Ideally it would be better to fix the data distortion, but a warning is better than silently doing nothing about the bug
     return (
         <section>
             <h2>Timeline</h2>
+            <p>
+                <em><b>Note:</b> the timeline may appear distorted at the very first row or very last row of the interval due to it potentially having less data than the bin size at the extremities</em>
+            </p>
             <div className="gateway-stats-timeline">
                 <table className="gateway-stats-timeline-table">
                     <thead className="gateway-stats-timeline-table-header">

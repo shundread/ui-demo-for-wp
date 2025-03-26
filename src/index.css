@@ -1,3 +1,5 @@
+/* Mostly project defaults */
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -24,9 +26,6 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -72,6 +71,61 @@ button:focus-visible {
   }
 }
 
+/* Gateway list */
+.gateway-list {
+  border-spacing: 0;
+  border: 1px solid black;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.gateway-list thead {
+  background-color: cornsilk
+}
+
+.gateway-list th {
+  text-align: center;
+}
+
+.gateway-list thead>:last-child>th {
+  border-bottom: 1px solid lightgrey;
+}
+
+.gateway-list th {
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+}
+
+.gateway-list td {
+  padding: 1rem;
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+}
+
+.gateway-list tbody>:nth-child(6n+3),
+.gateway-list tbody>:nth-child(6n+4),
+.gateway-list tbody>:nth-child(6n+5) {
+  background-color: whitesmoke;
+}
+
+.gateway-list button {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gateway-list tbody tr:hover {
+  background-color: lightgray;
+}
+
+.gateway-list tbody tr:hover>td {
+  background-color: lightgray;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+}
+
+.gateway-list button
 /* Gateway Detail Timeline */
 
 .gateway-stats-timeline {
@@ -81,18 +135,26 @@ button:focus-visible {
 .gateway-stats-timeline-table {
   background-color: black;
   color: white;
-  border: none;
+  border: 1px solid black;
   border-spacing: 0;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.gateway-stats-timeline-table>tbody>tr:hover {
+  outline: 1px solid grey;
 }
 
 .gateway-stats-timeline-table>thead>tr>th {
   min-width: 6rem;
+  padding: 1rem;
+  background-color: darkslategrey;
+  border-bottom: 1px solid black;
 }
-
 
 .gateway-stats-timeline-table>tbody>tr {
   height: 18px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .gateway-stats-timeline-table-body>tr,
@@ -101,7 +163,7 @@ button:focus-visible {
 }
 
 .gateway-stats-timeline-table-body-active {
-  background-color: lime;
+  background-color: lightgreen;
 }
 
 .gateway-stats-timeline-table-body-inactive {

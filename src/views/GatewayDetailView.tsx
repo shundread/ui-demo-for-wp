@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { SingleGatewayStatsResponse } from "../api/GatewayApiTypes";
 
 import JsonData from "../data/single_gateway_stats.json";
@@ -22,12 +22,17 @@ export function GatewayDetailView() {
     const stats = parseGatewayStatsResponse(data);
 
     return (
-        <main>
-            <h1>Info for gateway {gateway?.gatewayId || "<not found>"}</h1>
-            <GatewayDetail
-                basicInfo={gateway}
-                {...stats}
-            />
-        </main>
+        <>
+            <nav>
+                <Link to="/">Return home</Link>
+            </nav>
+            <main>
+                <h1>Info for gateway {gateway?.gatewayId || "<not found>"}</h1>
+                <GatewayDetail
+                    basicInfo={gateway}
+                    {...stats}
+                />
+            </main>
+        </>
     );
 }
