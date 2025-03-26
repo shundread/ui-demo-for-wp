@@ -160,6 +160,12 @@ button:focus-visible {
 .gateway-stats-timeline-table-body>tr,
 .gateway-stats-timeline-table-body>tr>td {
   border: none;
+  text-align: center;
+}
+
+.gateway-stats-timeline-table-body>tr>td>span {
+  color: black;
+  padding: 2px 2px;
 }
 
 .gateway-stats-timeline-table-body-active {
@@ -171,7 +177,7 @@ button:focus-visible {
 }
 
 .gateway-stats-timeline-table-body-unstable {
-  background-color: yellow;
+  background-color: burlywood;
 }
 
 .gateway-stats-timeline-table-body-offline {
